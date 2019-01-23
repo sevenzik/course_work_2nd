@@ -1,7 +1,17 @@
-{%  extends "main/wrapper.html" %}
+{%  extends "mainApp/wrapper.html" %}
 
 {% block content %}
+<div class="jumbotron">
+    <div class="container">
+      <h1>ТЫ пришёл узнать о гамильтоновых циклах?</h1>
+      <p>Ты пришёл по адресу...</p>
+      <p><a href="/theory" class="btn btn-primary btn-lg">Читать теорию &raquo;</a></p>
+    </div>
+  </div>
+{% endblock %}
 
-
-{#{% include "main/---.html" %}#}
+{% block script %}
+    <script>
+        $('#nav_main').addClass('active');
+    </script>
 {% endblock %}
