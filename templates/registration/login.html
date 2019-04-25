@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{%  extends "mainApp/wrapper.html" %}
 
-</body>
-</html>
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+    <div class="col-md-4" style="height: 300px"></div>
+    <div class="col-md-4" style="height: 300px">
+        {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+            {% else %}
+            {% endif %}
+        {% endif %}
+
+        <form role="form" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="input-group col-md-12">
+                        <input class="form-control" id="id_username" placeholder="Логин" maxlength="30" name="username" value="" type="text" />
+                </div>
+                <br>
+                <div class="input-group col-md-12">
+                        <input class="form-control" id="id_password" type="password" placeholder="Пароль" maxlength="30" name="password" value="" type="text" />
+                </div>
+
+                <div>
+                  <br>
+                  <input type="submit" value="Login" class="btn btn-primary btn-lg col-md-12">
+                  <br><br>
+                  <input type="hidden" name="next" value="{{ next }}" />
+                </div>
+            </div>
+        </form>
+
+        {# Assumes you setup the password_reset view in your URLconf #}
+        <p><a href="{% url 'password_reset' %}"  class="btn btn-danger btn-lg col-md-12">Lost password?</a></p>
+    </div>
+    </div>
+</div>
+
+{% endblock %}

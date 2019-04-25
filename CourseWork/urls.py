@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
+from . import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('mainApp.urls')),
     url(r'^sign/', include('django.contrib.auth.urls')),
+
+
+    url(r'^sign/register/$', views.RegisterFormView.as_view()),
 ]
