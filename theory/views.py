@@ -13,3 +13,15 @@ def theory_graphs(request):
 
 def theory_gamilton(request):
     return render(request, 'theory/theory_gamilton.html')
+
+
+def theory_euler(request):
+    return render(request, 'theory/theory_euler.html')
+
+
+def theory_fleri(request):
+    return render(request, 'theory/theory_fleri.html')
+
+
+def theory_cycles(request):
+    return render(request, 'theory/theory_cycles.html')

@@ -1,0 +1,21 @@
+{%  extends "mainApp/wrapper.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<div class="jumbotron">
+    <div class="container">
+      <p><a href="/" class="btn btn-primary btn-lg">На главную &raquo;</a></p>
+      <h1>Что такое эйлеров граф и цикл</h1>
+        <p>
+
+        </p>
+        <p><a href="/theory/fleri" class="btn btn-danger btn-lg">Далее &raquo;</a></p>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('#nav_theory').addClass('active');
+    </script>
+{% endblock %}
