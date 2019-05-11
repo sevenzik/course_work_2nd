@@ -5,7 +5,8 @@
 <div class="jumbotron">
     <div class="container">
 
-        <p>Well done!</p>
+        <p>Вы ответили на {{ count }} вопроса/ов!(не факт что верно)</p>
+        {{ ans.0 }}
 
     </div>
   </div>
@@ -13,6 +14,6 @@
 
 {% block script %}
     <script>
-        $('#nav_theory').addClass('active');
+        $('#nav_practice').addClass('active');
     </script>
 {% endblock %}

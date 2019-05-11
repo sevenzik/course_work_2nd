@@ -6,13 +6,19 @@
     <div class="container">
 
         <form method="post">
+
+            <input name="count" type="text" value="2" style="display: none">
+            <input name="time" type="text" value="{{ time }}" style="display: none">
             {% csrf_token %}
             {% for task in data %}
 
                 <p>
                     <b>{{ task.0 }})</b> {{ task.1.question }}
+                    <br>
+                    {{ task.1.graph }}
                 </p>
                 <input type="text" name="answer{{ task.0 }}" maxlength="20" autofocus="" placeholder="Ответ" required="" id="answer{{ task.0 }}" class="form-control">
+
                 <br><br>
 
             {% endfor %}

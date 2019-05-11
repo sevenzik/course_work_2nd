@@ -15,10 +15,10 @@ class Migration(migrations.Migration):
             name='Task',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('theme', models.CharField(max_length=50)),
-                ('num', models.BigIntegerField()),
+                ('theme', models.CharField(max_length=50, default="")),
+                ('num', models.BigIntegerField(default=0)),
                 ('question', models.TextField()),
-                ('answer', models.CharField(max_length=20)),
+                ('answer', models.CharField(max_length=20, default="")),
             ],
         ),
     ]

@@ -7,7 +7,7 @@ from django.views.generic import ListView, DetailView
 
 urlpatterns = [
     url(r'^gamilton/$', views.gamiltontest, name='gamiltontest'),
-    url(r'^gamilton/test/$', views.gamiltontestison, name='gamiltontestison'),
+    url(r'^gamilton/test/$', views.TestIsOnView.as_view(), name='gamiltontestison'),
     url(r'^gamilton/test/finished$', views.gamiltontestfinished, name='gamiltontestfinished'),
 ]
 
