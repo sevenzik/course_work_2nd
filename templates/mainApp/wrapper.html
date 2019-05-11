@@ -31,7 +31,7 @@
           <li id="nav_theory" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Теория <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="/theory">О графах</a></li>
+              <li><a href="/theory/graphs">О графах</a></li>
               <li class="divider"></li>
               <li><a href="/theory/gamilton">О гамильтоновых циклах</a></li>
               <li><a href="/theory/euler">О эйлеровых циклах</a></li>
@@ -40,12 +40,13 @@
               <li><a href="/theory/cycles">Алгоритм на основе циклов</a></li>
             </ul>
           </li>
-          <li class="dropdown">
+          <li id="nav_practice" class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Практика <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><a href="#">Вопросы по теории</a></li>
               <li class="divider"></li>
-              <li><a href="#">Практические задания</a></li>
+              <li><a><b>Практические задания</b></a></li>
+              <li><a href="/practice/gamilton">Гамильтонов цикл</a></li>
             </ul>
           </li>
         </ul>
@@ -60,7 +61,7 @@
                 <ul class="dropdown-menu">
                   <li><a href="#">Мой профиль</a></li>
                   <li class="divider"></li>
-                  <li><a href="/sign/logout/?next={{request.path}}">Выйти из системы</a></li>
+                  <li><a href="/sign/logout/?next={{request.path}}">Выйти из системы ({{ user.username }})</a></li>
                 </ul>
             </li>
             {% else %}
@@ -75,7 +76,7 @@
       </div>
     </div>
   </nav>
-  <br><br><br><br>
+  <br><br><br>
 
   {% block content %}
   {% endblock %}

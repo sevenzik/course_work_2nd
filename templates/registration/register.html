@@ -3,10 +3,72 @@
 {% block title %}Регистрация пользователя{% endblock %}
 
 {% block content %}
-    <form action="" method="post">
-      {% csrf_token %}
-      <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
-      {{ form }}
-      <button type="submit">Зарегистрироваться</button>
-    </form>
+<div class="jumbotron">
+    <div class="container">
+
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+        {% if not user.is_authenticated %}
+        <form action="" method="post">
+          {% csrf_token %}
+{#            {{ form }}#}
+            <h3>Регистрация</h3>
+          <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+            <label for="id_username"></label>
+            <input type="text" name="username" maxlength="150" autofocus="" placeholder="Логин" required="" id="id_username" class="form-control">
+            <br>
+            {{ form.username.errors }}
+            <span class="helptext  form-text text-muted">
+                <ul>
+                    <li>
+                        Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_.
+                    </li>
+                </ul>
+            </span>
+
+
+
+
+            <label for="id_password1"></label>
+            <br>
+            <input type="password" name="password1" required="" placeholder="Пароль" id="id_password1" class="form-control">
+            <br>
+            {{ form.password1.errors }}
+            <br>
+            <span class="helptext form-text text-muted">
+                <ul>
+                    <li>
+                        Ваш пароль не должен совпадать с вашим именем или другой
+                        персональной информацией или быть слишком похожим на неё.
+                    </li>
+                    <li>
+                        Ваш пароль должен содержать как минимум 8 символов.
+                    </li>
+                    <li>
+                        Ваш пароль не может быть одним из широко распространённых паролей.
+                    </li>
+                    <li>
+                        Ваш пароль не может состоять только из цифр.
+                    </li>
+                </ul>
+            </span>
+            <label for="id_password2"></label>
+            <input type="password" name="password2" required="" placeholder="Повторите пароль" id="id_password2" class="form-control">
+            <br>
+            {{ form.password2.errors }}
+            <br>
+{#            <span class="helptext">#}
+{#                Для подтверждения введите, пожалуйста, пароль ещё раз.#}
+{#            </span>#}
+            <br>
+            <button type="submit" class="btn btn-lg btn-danger">Зарегистрироваться</button>
+        </form>
+        {% else %}
+
+            <h3>Регистрация</h3>
+            <p><i>Вы не можете регистрироваться будучи авторизированы</i></p>
+        {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
