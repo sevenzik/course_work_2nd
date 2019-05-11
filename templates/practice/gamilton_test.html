@@ -1,0 +1,17 @@
+{%  extends "mainApp/wrapper.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<div class="jumbotron">
+    <div class="container">
+        <p>Gamilton test</p>
+        <p><a href="/practice/gamilton/test" class="btn btn-primary btn-lg">Начать тест &raquo;</a></p>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('#nav_practice').addClass('active');
+    </script>
+{% endblock %}
