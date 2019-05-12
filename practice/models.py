@@ -11,7 +11,7 @@ class Task(models.Model):
     answer = models.CharField(max_length=20, default="")
 
     def __str__(self):
-        return self.question
+        return self.theme + " " + str(self.num)
 
 
 class DoneTest(models.Model):

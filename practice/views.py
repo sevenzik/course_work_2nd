@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from practice.models import Task, DoneTest
-from practice.forms import TestForm
+from django.contrib.auth.models import User
+from userprofile.models import UserProfile
 import random
 import datetime
 
@@ -14,18 +15,23 @@ class TestIsOnView(TemplateView):
     template_not_logged = 'registration/login.html'
 
     def get(self, request):
-        number_of_questions = 2
+        u = User.objects.get(username=request.user.username)
+        number_of_questions = u.userprofile.lastNumberOfQuestions
+        filt_theme = u.userprofile.last_theme
         if request.user.is_authenticated:
-            gam_questions = Task.objects.filter(theme='Гамильтонов цикл')
+            if filt_theme != "all":
+                gam_questions = Task.objects.filter(theme=filt_theme)
+            else:
+                gam_questions = Task.objects.all()
             our_questions = random.sample(list(gam_questions), number_of_questions)
             our_data = list()
             for i in range(len(our_questions)):
                 our_data.append([i + 1, our_questions[i]])
 
             now = datetime.datetime.now()
-            data = {'data': our_data, 'time': str(now)}
+            data = {'data': our_data, 'time': str(now), 'count': number_of_questions}
 
-            newDoneTest = DoneTest(date_started=now, login=request.user.username, numberOfQuestions=len(our_questions))
+            newDoneTest = DoneTest(date_started=now, login=request.user.username, numberOfQuestions=number_of_questions)
             newDoneTest.save()
 
             for i in range(1, number_of_questions + 1):
@@ -45,7 +51,7 @@ class TestIsOnView(TemplateView):
             ans.append(request.POST['answer' + str(i)])
 
         donetest = DoneTest.objects.get(date_started=request.POST['time'], login=request.user.username)
-
+        right = 0
         for i in range(1, int(number_of_questions) + 1):
             # values_for_update = {'user_ans' + str(i): request.POST['answer' + str(i)],
             #                      'is_right' + str(i): request.POST['answer' + str(i)] ==
@@ -56,19 +62,81 @@ class TestIsOnView(TemplateView):
 
             rightness = str(str(request.POST['answer' + str(i)])
                     == str(Task.objects.get(theme=getattr(donetest, 'theme' + str(i)), num=getattr(donetest, 'num' + str(i))).answer))
-
+            if rightness == "True":
+                right += 1
             setattr(donetest, 'user_ans' + str(i), request.POST['answer' + str(i)])
             setattr(donetest, 'is_right' + str(i), rightness)
 
-        args = {'ans': ans, 'count': number_of_questions}
+        args = {'ans': ans, 'count': number_of_questions, 'right': right}
         donetest.save()
+
+        u = UserProfile.objects.get(user=request.user)
+        setattr(u, 'test_started', 0)
+
+        u.save()
 
         return render(request, self.template_name_post, args)
 
 
 def gamiltontest(request):
-    return render(request, 'practice/gamilton_test.html')
+    if request.method == 'GET':
+        return render(request, 'practice/gamilton_test.html')
+    elif request.method == 'POST':
+        if request.user.is_authenticated:
+            u, created = UserProfile.objects.get_or_create(user=request.user)
+            # setattr(u, 'lastNumberOfQuestions',
+            #         2
+            #        # request.POST['num_of_questions']
+            #         )
+
+            u.lastNumberOfQuestions = request.POST['num_of_questions']
+            u.last_theme = "Гамильтонов цикл"
+            setattr(u, 'test_started', "True")
+            u.save()
+            return redirect('/practice/gamilton/test/')
+        else:
+            return redirect('registration/login.html')
 
 
-def gamiltontestfinished(request):
-    return render(request, 'practice/test_finished.html')
+def eulertest(request):
+    if request.method == 'GET':
+        return render(request, 'practice/euler_test.html')
+    elif request.method == 'POST':
+        if request.user.is_authenticated:
+            u, created = UserProfile.objects.get_or_create(user=request.user)
+            # setattr(u, 'lastNumberOfQuestions',
+            #         2
+            #        # request.POST['num_of_questions']
+            #         )
+
+            u.lastNumberOfQuestions = request.POST['num_of_questions']
+            u.last_theme = "Эйлеров цикл"
+            setattr(u, 'test_started', "True")
+            u.save()
+            return redirect('/practice/gamilton/test/')
+        else:
+            return redirect('registration/login.html')
+
+
+def alltest(request):
+    if request.method == 'GET':
+        return render(request, 'practice/all_test.html')
+    elif request.method == 'POST':
+        if request.user.is_authenticated:
+            u, created = UserProfile.objects.get_or_create(user=request.user)
+            # setattr(u, 'lastNumberOfQuestions',
+            #         2
+            #        # request.POST['num_of_questions']
+            #         )
+
+            u.lastNumberOfQuestions = request.POST['num_of_questions']
+            u.last_theme = "all"
+            setattr(u, 'test_started', "True")
+            u.save()
+            return redirect('/practice/gamilton/test/')
+        else:
+            return redirect('registration/login.html')
+
+
+
+
