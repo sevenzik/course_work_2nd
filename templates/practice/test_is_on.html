@@ -11,16 +11,18 @@
             <input name="time" type="text" value="{{ time }}" style="display: none">
             {% csrf_token %}
             {% for task in data %}
+             <div class="thumbnail">
+                 <div class="caption">
+                    <p>
+                        <b>{{ task.0 }}</b> <p id="exactly_task{{ task.0 }}">{{ task.1.question }}</p>
+                        <br>
+                        <input id="data{{ task.0 }}" value="{{ task.1.graph }}" style="display: none" ></input>
+                        <div id="graphviz_svg{{ task.0 }}"><!-- Target for dynamic svg generation --><br>Загрузка...<br></div>
+                    </p>
+                    <input type="text" name="answer{{ task.0 }}" maxlength="20" autofocus="" placeholder="Ответ" required="" id="answer{{ task.0 }}" class="form-control">
 
-                <p>
-                    <b>{{ task.0 }})</b> {{ task.1.question }}
-                    <br>
-                    <input id="data{{ task.0 }}" value="{{ task.1.graph }}" style="display: none" ></input>
-                    <div id="graphviz_svg{{ task.0 }}"><!-- Target for dynamic svg generation --><br>Загрузка...<br></div>
-                </p>
-                <input type="text" name="answer{{ task.0 }}" maxlength="20" autofocus="" placeholder="Ответ" required="" id="answer{{ task.0 }}" class="form-control">
-
-                <br><br>
+                </div>
+             </div>
 
             {% endfor %}
 

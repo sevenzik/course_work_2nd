@@ -53,12 +53,6 @@ class TestIsOnView(TemplateView):
         donetest = DoneTest.objects.get(date_started=request.POST['time'], login=request.user.username)
         right = 0
         for i in range(1, int(number_of_questions) + 1):
-            # values_for_update = {'user_ans' + str(i): request.POST['answer' + str(i)],
-            #                      'is_right' + str(i): request.POST['answer' + str(i)] ==
-            #                                           Task.objects.get(theme=donetest['theme' + str(i)],
-            #                                                            num=donetest['num' + str(i)]).answer}
-            # DoneTest.objects.filter(login=request.user.username).update_or_create(date_started=request.POST['time'],
-            #                                                                       defaults=values_for_update)
 
             rightness = str(str(request.POST['answer' + str(i)])
                     == str(Task.objects.get(theme=getattr(donetest, 'theme' + str(i)), num=getattr(donetest, 'num' + str(i))).answer))
@@ -68,6 +62,7 @@ class TestIsOnView(TemplateView):
             setattr(donetest, 'is_right' + str(i), rightness)
 
         args = {'ans': ans, 'count': number_of_questions, 'right': right}
+        donetest.numberOfRightAnswers = right
         donetest.save()
 
         u = UserProfile.objects.get(user=request.user)
@@ -95,7 +90,7 @@ def gamiltontest(request):
             u.save()
             return redirect('/practice/gamilton/test/')
         else:
-            return redirect('registration/login.html')
+            return redirect('/sign/login/')
 
 
 def eulertest(request):
@@ -115,7 +110,7 @@ def eulertest(request):
             u.save()
             return redirect('/practice/gamilton/test/')
         else:
-            return redirect('registration/login.html')
+            return redirect('/sign/login/')
 
 
 def alltest(request):
@@ -124,19 +119,45 @@ def alltest(request):
     elif request.method == 'POST':
         if request.user.is_authenticated:
             u, created = UserProfile.objects.get_or_create(user=request.user)
-            # setattr(u, 'lastNumberOfQuestions',
-            #         2
-            #        # request.POST['num_of_questions']
-            #         )
-
             u.lastNumberOfQuestions = request.POST['num_of_questions']
             u.last_theme = "all"
             setattr(u, 'test_started', "True")
             u.save()
             return redirect('/practice/gamilton/test/')
         else:
-            return redirect('registration/login.html')
+            return redirect('/sign/login/')
 
+
+def yourtestlist(request):
+    if request.user.is_authenticated:
+        donetests = DoneTest.objects.filter(login=request.user.username).order_by('date_started')
+        donetests = donetests.reverse()
+        data = {'data': donetests}
+        return render(request, 'practice/yourtestlist.html', context=data)
+    else:
+        return redirect('/sign/login/')
+
+
+def yourtest(request, id):
+    if DoneTest.objects.filter(id=id).count() == 0:
+        return render(request, 'mainApp/no_permission.html')
+
+    donetest = DoneTest.objects.get(id=id)
+
+    if not request.user.is_authenticated:
+        return redirect('/sign/login/')
+    elif request.user.username != donetest.login:
+        return render(request, 'mainApp/no_permission.html')
+
+    our_questions = []
+
+    for i in range(1, 1 + donetest.numberOfQuestions):
+        our_questions.append([i, Task.objects.get(theme=getattr(donetest, 'theme' + str(i)), num=getattr(donetest, 'num' + str(i))),
+                                 getattr(donetest, 'user_ans' + str(i)), getattr(donetest, 'is_right' + str(i))])
+
+    data = {'questions': our_questions, 'time': str(getattr(donetest, 'date_started')), 'count': getattr(donetest, 'numberOfQuestions')}
+
+    return render(request, 'practice/yourtest.html', context=data)
 
 
 

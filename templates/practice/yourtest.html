@@ -1,0 +1,45 @@
+{%  extends "mainApp/wrapper.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<div class="jumbotron">
+    <div class="container">
+
+        <form method="post">
+
+            <input id="count" name="count" type="text" value="{{ count }}" style="display: none">
+            <input name="time" type="text" value="{{ time }}" style="display: none">
+            {% csrf_token %}
+            {% for task in questions %}
+                <div class="thumbnail">
+                    <div class="caption">
+                        <p>
+                            <b>{{ task.0 }})</b> {{ task.1.question }}
+                            <br>
+                            <input id="data{{ task.0 }}" value="{{ task.1.graph }}" style="display: none" ></input>
+                            <div id="graphviz_svg{{ task.0 }}"><br>Загрузка...<br></div>
+                        </p>
+
+
+
+                        <p>Ваш ответ: {{ task.2 }}. {% if task.3 %} Верно. {% else %} Неверно. {% endif %}</p>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+
+        </form>
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('#nav_acc').addClass('active');
+    </script>
+    <script src="{% static 'js/viz.js/viz.js' %}"></script>
+    <script src="{% static 'js/viz.js/full.render.js' %}"></script>
+    <script src="{% static 'js/for_viz.js' %}"></script>
+{% endblock %}

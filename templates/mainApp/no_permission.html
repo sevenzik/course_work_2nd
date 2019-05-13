@@ -1,0 +1,18 @@
+{%  extends "mainApp/wrapper.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<div class="jumbotron">
+    <div class="container">
+
+        <p>У вас нет прав доступа к этой странице</p>
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('#nav_practice').addClass('active');
+    </script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{%  extends "mainApp/wrapper.html" %}
+
+{% block content %}
+
+
+{% load staticfiles %}
+<div class="jumbotron">
+    <div class="container">
+
+    <h3>Список ваших тестов</h3>
+
+    {% for test in data %}
+
+        <div class="thumbnail">
+            <div class="caption">
+                <h5>Ваш тест от {{ test.date_started }}</h5>
+                <p>Результат : {{ test.numberOfRightAnswers }} из {{ test.numberOfQuestions }}</p>
+                <a href="/practice/yourtest/{{ test.id  }}">Посмотреть тест</a>
+            </div>
+        </div>
+    {% empty %}
+        <div class="thumbnail">
+            <div class="caption">
+                <p>Вы не прошли ни одного теста.</p>
+            </div>
+        </div>
+    {% endfor %}
+
+
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('#nav_acc').addClass('active');
+    </script>
+{% endblock %}

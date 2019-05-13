@@ -4,7 +4,11 @@ from django.db import models
 
 
 class Task(models.Model):
-    theme = models.CharField(max_length=50, default="")
+    THEMES = (
+        ('Гамильтонов цикл', 'Гамильтонов цикл'),
+        ('Эйлеров цикл', 'Эйлеров цикл'),
+    )
+    theme = models.CharField(max_length=50, choices=THEMES)
     num = models.BigIntegerField(default=0)
     question = models.TextField()
     graph = models.TextField()
@@ -17,6 +21,7 @@ class Task(models.Model):
 class DoneTest(models.Model):
     login = models.CharField(max_length=50, default="")
     numberOfQuestions = models.BigIntegerField(default=0)
+    numberOfRightAnswers = models.BigIntegerField(default=0)
     date_started = models.DateTimeField(editable=True)
 
     theme1 = models.CharField(max_length=50, default="")
