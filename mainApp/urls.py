@@ -8,4 +8,5 @@ urlpatterns = [
     # url(r'^theory$', views.index, name='index'),
     url(r'^theory/', include('theory.urls')),
     url(r'^practice/', include('practice.urls')),
+    url(r'^calc/', include('calc.urls')),
 ]

@@ -1,0 +1,167 @@
+{%  extends "mainApp/wrapper.html" %}
+
+{% block content %}
+{% load staticfiles %}
+
+
+<link rel="stylesheet" href="http://bootstraptema.ru/snippets/slider/2016/cbpFWSlider/cbpFWSlider.css" />
+<input id="count" name="count" type="text" value="10" style="display: none">
+<div class="jumbotron">
+    <div class="container">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="loading"><br><h1>Загрузка...</h1><br></div>
+                    <div id="cbp-fwslider" class="cbp-fwslider" style="display: none">
+                         <ul>
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data1" value="digraph {   rankdir=LR;    d -> b;    b -> c;    c -> d;    c -> a;    a -> e;    e -> f;    f -> a;    a -> c;}" style="display: none" ></input>
+                                     <div id="graphviz_svg1"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Имеем исходный граф, начинаем алгоритм Хиргольцера из вершины <i>c</i>.</p>
+                                 <p style="text-align: center">Пусть приоритет выбора вершин у нас идёт в алфавитном порядке.</p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data2" value="digraph {   rankdir=LR;    d -> b;    b -> c;    c -> d;    c -> a[color=green,penwidth=5.0];    a -> e;    e -> f;    f -> a;    a -> c;}" style="display: none" ></input>
+                                     <div id="graphviz_svg2"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Из вершины <i>c</i> идём в вершину <i>а</i>. Далее удаляем это ребро.</p>
+                                 <p style="text-align: center">Текущий цикл: <i>ca...</i></p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data3" value="digraph {   rankdir=LR;    d -> b;    b -> c;    c -> d;    c -> a[color=grey];    a -> e;    e -> f;    f -> a;    a -> c[color=green,penwidth=5.0];}" style="display: none" ></input>
+                                     <div id="graphviz_svg3"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Из вершины <i>a</i> идём в вершину <i>c</i>. Далее удаляем это ребро.</p>
+                                 <p style="text-align: center">Текущий цикл: <i>caс...</i></p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data4" value="digraph {   rankdir=LR;    d -> b;    b -> c;    c -> d[color=green,penwidth=5.0];    c -> a[color=grey];    a -> e;    e -> f;    f -> a;    a -> c[color=grey];}" style="display: none" ></input>
+                                     <div id="graphviz_svg4"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Из вершины <i>с</i> идём в вершину <i>d</i>. Далее удаляем это ребро.</p>
+                                 <p style="text-align: center">Текущий цикл: <i>сacd...</i></p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data5" value="digraph {   rankdir=LR;    d -> b[color=green,penwidth=5.0];    b -> c;    c -> d[color=grey];    c -> a[color=grey];    a -> e;    e -> f;    f -> a;    a -> c[color=grey];}" style="display: none" ></input>
+                                     <div id="graphviz_svg5"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Из вершины <i>d</i> идём в вершину <i>b</i>. Далее удаляем это ребро.</p>
+                                 <p style="text-align: center">Текущий цикл: <i>cacdb...</i></p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data6" value="digraph {   rankdir=LR;    d -> b[color=grey];    b -> c[color=green,penwidth=5.0];    c -> d[color=grey];    c -> a[color=grey];    a -> e;    e -> f;    f -> a;    a -> c[color=grey];}" style="display: none" ></input>
+                                     <div id="graphviz_svg6"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Из вершины <i>b</i> идём в вершину <i>c</i>. Далее удаляем это ребро.</p>
+                                 <p style="text-align: center">Текущий цикл: <i>cacdbc...</i></p>
+                                 <p style="text-align: center">У <i>c</i> нет соседей, значит первый цикл окончен.</p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data7" value="digraph {   rankdir=LR;    d -> b[color=grey];    b -> c[color=grey];    c -> d[color=grey];    c -> a[color=grey];    a -> e[color=green,penwidth=5.0];    e -> f;    f -> a;    a -> c[color=grey];}" style="display: none" ></input>
+                                     <div id="graphviz_svg7"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Выбираем новую неизолированную вершину для начала нового цикла: <i>а</i></p>
+                                 <p style="text-align: center">Из вершины <i>а</i> идём в вершину <i>у</i>. Далее удаляем это ребро.</p>
+                                 <p style="text-align: center">Текущий цикл: <i>ае...</i></p>
+                                 <p style="text-align: center">Завершённые циклы: <i>cacdbc</i></p>
+
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data8" value="digraph {   rankdir=LR;    d -> b[color=grey];    b -> c[color=grey];    c -> d[color=grey];    c -> a[color=grey];    a -> e[color=grey];    e -> f[color=green,penwidth=5.0];    f -> a;    a -> c[color=grey];}" style="display: none" ></input>
+                                     <div id="graphviz_svg8"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+
+                                 <p style="text-align: center">Из вершины <i>e</i> идём в вершину <i>f</i>. Далее удаляем это ребро.</p>
+                                 <p style="text-align: center">Текущий цикл: <i>аеf...</i></p>
+                                 <p style="text-align: center">Завершённые циклы: <i>cacdbc</i></p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data9" value="digraph {   rankdir=LR;    d -> b[color=grey];    b -> c[color=grey];    c -> d[color=grey];    c -> a[color=grey];    a -> e[color=grey];    e -> f[color=grey];    f -> a[color=green,penwidth=5.0];    a -> c[color=grey];}" style="display: none" ></input>
+                                     <div id="graphviz_svg9"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Из вершины <i>f</i> идём в вершину <i>a</i>. Далее удаляем это ребро.</p>
+                                 <p style="text-align: center">Текущий цикл: <i>аеfa...</i></p>
+                                 <p style="text-align: center">У <i>a</i> нет соседей, значит второй цикл окончен.</p>
+                                 <p style="text-align: center">Завершённые циклы: <i>cacdbc</i></p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data10" value="digraph {   rankdir=LR;    d -> b[color=grey];    b -> c[color=grey];    c -> d[color=grey];    c -> a[color=grey];    a -> e[color=grey];    e -> f[color=grey];    f -> a[color=grey];    a -> c[color=grey];}" style="display: none" ></input>
+                                     <div id="graphviz_svg10"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Рёбер больше нет.</p>
+                                 <p style="text-align: center">Завершённые циклы: <i>cacdbc</i>, <i>аеfa</i></p>
+                                 <p style="text-align: center">Начинаем идти по первому циклу: (цикл 1)..c..a..(видим вершину из цикла 2)..</p>
+                                 <p style="text-align: center">..(идём по циклу 2)..e..f..a..(возвращаемся в цикл 1)..c..d..b..c</p>
+                                 <p style="text-align: center">Итоговый эйлеров цикл: <i>caefacdbc</i></p>
+
+                             </li>
+
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p><a href="/theory/cycles" class="btn btn-primary btn-lg">&laquo; Назад</a></p>
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<script src="http://bootstraptema.ru/snippets/slider/2016/cbpFWSlider/cbpFWSlider.min.js"></script>
+<script src="{% static 'js/viz.js/viz.js' %}"></script>
+<script src="{% static 'js/viz.js/full.render.js' %}"></script>
+<script src="{% static 'js/for_viz.js' %}"></script>
+
+    <script>
+        $('#nav_theory').addClass('active');
+    </script>
+    <script>
+$( function() {
+$( '#cbp-fwslider' ).cbpFWSlider();
+});
+</script>
+{% endblock %}

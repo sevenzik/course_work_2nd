@@ -28,3 +28,11 @@ def theory_fleri(request):
 
 def theory_cycles(request):
     return render(request, 'theory/theory_cycles.html')
+
+
+def theory_fleri_example(request):
+    return render(request, 'theory/theory_fleri_example.html')
+
+
+def theory_cycles_example(request):
+    return render(request, 'theory/theory_cycles_example.html')

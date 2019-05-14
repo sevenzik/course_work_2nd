@@ -1,0 +1,64 @@
+{%  extends "mainApp/wrapper.html" %}
+
+{% block content %}
+{% load staticfiles %}
+
+
+<link rel="stylesheet" href="http://bootstraptema.ru/snippets/slider/2016/cbpFWSlider/cbpFWSlider.css" />
+<input id="count" name="count" type="text" value="{{ count }}" style="display: none">
+<div class="jumbotron">
+    <div class="container">
+        <p>Эйлеров цикл: {{ ans }}</p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="loading"><br><h1>Загрузка...</h1><br></div>
+                    <div id="cbp-fwslider" class="cbp-fwslider" style="display: none">
+                         <ul>
+                             {% for task in data %}
+                                <li>
+                                     <br><br><br><br>
+                                     <a href="#">
+                                         <input id="data{{ task.0 }}" value="{{ task.1 }}" style="display: none" ></input>
+                                         <div id="graphviz_svg{{ task.0 }}"><br>Загрузка...<br></div>
+                                     </a>
+                                     <br>
+                                </li>
+                            {% endfor %}
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: center">
+            Рёбра могут иметь 5 цветов: <br>
+            Чёрные - невычеркнутые рёбра графа<br>
+            Серые - вычеркнутые рёбра графа<br>
+            Красные - исследуемые в данный момент рёбра, являющиеся мостами<br>
+            Жёлтые - исследуемые в данный момент рёбра, которые могли бы быть следующим шагом алгоритма<br>
+            Зелёное - (не более одного на слайд) исследуемое в данный момент рёбро, которое алгоритм выбрал как следующее
+            в эйлеровом цикле
+        </p>
+
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<script src="http://bootstraptema.ru/snippets/slider/2016/cbpFWSlider/cbpFWSlider.min.js"></script>
+<script src="{% static 'js/viz.js/viz.js' %}"></script>
+<script src="{% static 'js/viz.js/full.render.js' %}"></script>
+<script src="{% static 'js/for_viz.js' %}"></script>
+
+    <script>
+        $('#nav_сalc').addClass('active');
+    </script>
+    <script>
+$( function() {
+$( '#cbp-fwslider' ).cbpFWSlider();
+});
+</script>
+{% endblock %}

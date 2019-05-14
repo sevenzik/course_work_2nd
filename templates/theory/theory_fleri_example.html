@@ -1,0 +1,156 @@
+{%  extends "mainApp/wrapper.html" %}
+
+{% block content %}
+{% load staticfiles %}
+
+
+<link rel="stylesheet" href="http://bootstraptema.ru/snippets/slider/2016/cbpFWSlider/cbpFWSlider.css" />
+<input id="count" name="count" type="text" value="10" style="display: none">
+<div class="jumbotron">
+    <div class="container">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="loading"><br><h1>Загрузка...</h1><br></div>
+                    <div id="cbp-fwslider" class="cbp-fwslider" style="display: none">
+                         <ul>
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data1" value="digraph {   rankdir=LR;    d -> b;    b -> c;    c -> d;    c -> a;    a -> e;    e -> f;    f -> a;    a -> c;}" style="display: none" ></input>
+                                     <div id="graphviz_svg1"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Имеем исходный граф, начинаем алгоритм Флёри из вершины <i>c</i>.</p>
+                                 <p style="text-align: center">Пусть приоритет выбора вершин у нас идёт в алфавитном порядке.</p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data2" value="digraph {   rankdir=LR;    d -> b;    b -> c;    c -> d;    c -> a[color=green,penwidth=5.0];    a -> e;    e -> f;    f -> a;    a -> c;}" style="display: none" ></input>
+                                     <div id="graphviz_svg2"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Из вершины <i>c</i> идём в вершину <i>а</i> т.к. данное ребро не является мостом. Далее удаляем его.</p>
+                                 <p style="text-align: center">Текущий эйлеров цикл: <i>ca...</i></p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data3" value="digraph {   rankdir=LR;    d -> b;    b -> c;    c -> d;    c -> a[color=grey];    a -> e[color=green,penwidth=5.0];    e -> f;    f -> a;    a -> c[color=red,penwidth=5.0];}" style="display: none" ></input>
+                                     <div id="graphviz_svg3"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Из вершины <i>a</i> НЕ идём в вершину <i>c</i> т.к. данное ребро является мостом.</p>
+                                 <p style="text-align: center">Из вершины <i>a</i> идём в вершину <i>e</i> т.к. данное ребро не является мостом. Далее удаляем его.</p>
+                                 <p style="text-align: center">Текущий эйлеров цикл: <i>cae...</i></p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data4" value="digraph {   rankdir=LR;    d -> b;    b -> c;    c -> d;    c -> a[color=grey];    a -> e[color=grey];    e -> f[color=green,penwidth=5.0];    f -> a;    a -> c;}" style="display: none" ></input>
+                                     <div id="graphviz_svg4"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Из вершины <i>e</i> идём в вершину <i>f</i> т.к. на выбор всего одно ребро. Далее удаляем его.</p>
+                                 <p style="text-align: center">Текущий эйлеров цикл: <i>caef...</i></p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data5" value="digraph {   rankdir=LR;    d -> b;    b -> c;    c -> d;    c -> a[color=grey];    a -> e[color=grey];    e -> f[color=grey];    f -> a[color=green,penwidth=5.0];    a -> c;}" style="display: none" ></input>
+                                     <div id="graphviz_svg5"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Из вершины <i>f</i> идём в вершину <i>a</i> т.к. на выбор всего одно ребро. Далее удаляем его.</p>
+                                 <p style="text-align: center">Текущий эйлеров цикл: <i>caefa...</i></p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data6" value="digraph {   rankdir=LR;    d -> b;    b -> c;    c -> d;    c -> a[color=grey];    a -> e[color=grey];    e -> f[color=grey];    f -> a[color=grey];    a -> c[color=green,penwidth=5.0];}" style="display: none" ></input>
+                                     <div id="graphviz_svg6"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Из вершины <i>а</i> идём в вершину <i>с</i> т.к. на выбор всего одно ребро. Далее удаляем его.</p>
+                                 <p style="text-align: center">Текущий эйлеров цикл: <i>caefac...</i></p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data7" value="digraph {   rankdir=LR;    d -> b;    b -> c;    c -> d[color=green,penwidth=5.0];    c -> a[color=grey];    a -> e[color=grey];    e -> f[color=grey];    f -> a[color=grey];    a -> c[color=grey];}" style="display: none" ></input>
+                                     <div id="graphviz_svg7"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Из вершины <i>с</i> идём в вершину <i>d</i> т.к. на выбор всего одно ребро. Далее удаляем его.</p>
+                                 <p style="text-align: center">Текущий эйлеров цикл: <i>caefacd...</i></p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data8" value="digraph {   rankdir=LR;    d -> b[color=green,penwidth=5.0];    b -> c;    c -> d[color=grey];    c -> a[color=grey];    a -> e[color=grey];    e -> f[color=grey];    f -> a[color=grey];    a -> c[color=grey];}" style="display: none" ></input>
+                                     <div id="graphviz_svg8"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Из вершины <i>d</i> идём в вершину <i>b</i> т.к. на выбор всего одно ребро. Далее удаляем его.</p>
+                                 <p style="text-align: center">Текущий эйлеров цикл: <i>caefacdb...</i></p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data9" value="digraph {   rankdir=LR;    d -> b[color=grey];    b -> c[color=green,penwidth=5.0];    c -> d[color=grey];    c -> a[color=grey];    a -> e[color=grey];    e -> f[color=grey];    f -> a[color=grey];    a -> c[color=grey];}" style="display: none" ></input>
+                                     <div id="graphviz_svg9"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Из вершины <i>b</i> идём в вершину <i>c</i> т.к. на выбор всего одно ребро. Далее удаляем его.</p>
+                                 <p style="text-align: center">Текущий эйлеров цикл: <i>caefacdbc...</i></p>
+                             </li>
+
+                             <li>
+                                 <br><br><br><br>
+                                 <a href="#">
+                                     <input id="data10" value="digraph {   rankdir=LR;    d -> b[color=grey];    b -> c[color=grey];    c -> d[color=grey];    c -> a[color=grey];    a -> e[color=grey];    e -> f[color=grey];    f -> a[color=grey];    a -> c[color=grey];}" style="display: none" ></input>
+                                     <div id="graphviz_svg10"><br>Загрузка...<br></div>
+                                 </a>
+                                 <br>
+                                 <p style="text-align: center">Рёбер больше нет.</p>
+                                 <p style="text-align: center">Итоговый эйлеров цикл: <i>caefacdbc</i></p>
+                             </li>
+
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p><a href="/theory/fleri" class="btn btn-primary btn-lg">&laquo; Назад</a></p>
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<script src="http://bootstraptema.ru/snippets/slider/2016/cbpFWSlider/cbpFWSlider.min.js"></script>
+<script src="{% static 'js/viz.js/viz.js' %}"></script>
+<script src="{% static 'js/viz.js/full.render.js' %}"></script>
+<script src="{% static 'js/for_viz.js' %}"></script>
+
+    <script>
+        $('#nav_theory').addClass('active');
+    </script>
+    <script>
+$( function() {
+$( '#cbp-fwslider' ).cbpFWSlider();
+});
+</script>
+{% endblock %}

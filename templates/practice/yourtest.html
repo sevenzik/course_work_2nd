@@ -14,8 +14,9 @@
                 <div class="thumbnail">
                     <div class="caption">
                         <p>
-                            <b>{{ task.0 }})</b> {{ task.1.question }}
+                            <b>{{ task.0 }}</b> <p id="exactly_task{{ task.0 }}"></p>
                             <br>
+                            <input id="task_source{{ task.0 }}" value="{{ task.1.question }}" style="display: none" ></input>
                             <input id="data{{ task.0 }}" value="{{ task.1.graph }}" style="display: none" ></input>
                             <div id="graphviz_svg{{ task.0 }}"><br>Загрузка...<br></div>
                         </p>

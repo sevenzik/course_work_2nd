@@ -9,5 +9,7 @@ urlpatterns = [
     url(r'^euler/$', views.theory_euler, name='theory_euler'),
     url(r'^fleri/$', views.theory_fleri, name='theory_fleri'),
     url(r'^cycles/$', views.theory_cycles, name='theory_cycles'),
+    url(r'^fleri/example/$', views.theory_fleri_example, name='theory_fleri_example'),
+    url(r'^cycles/example/$', views.theory_cycles_example, name='theory_cycles_example'),
 ]
 

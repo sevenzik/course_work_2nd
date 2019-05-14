@@ -9,7 +9,7 @@
 <div class="jumbotron">
     <div class="container">
       <p><a href="/" class="btn btn-primary btn-lg">На главную &raquo;</a></p>
-      <h1>Что такое алгоритм Флери по поиску эйлерова цикла</h1>
+      <h1>Алгоритм Флери по поиску эйлерова цикла</h1>
         <p>
             Пусть задан граф G = (V,E). Начинаем с некоторой вершины <i>p ∈ V</i>
             и каждый раз вычеркиваем пройденное ребро. Не проходим по ребру, если удаление этого ребра приводит к разбиению
@@ -17,36 +17,21 @@
             т.е. необходимо проверять, является ли ребро мостом или нет.
         </p>
 
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div id="cbp-fwslider" class="cbp-fwslider">
-                         <ul>
-                             <li><a href="#"><img src="{% static 'theory/test.jpg' %}" alt="demo 01"/></a></li>
-                             <li><a href="#"><img src="{% static 'theory/test.jpg' %}" alt="demo 02"/></a></li>
-                             <li><a href="#"><img src="{% static 'theory/test.jpg' %}" alt="demo 03"/></a></li>
-                         </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <p><a href="/theory/fleri/example" class="btn btn-primary btn-lg">Пример &raquo;</a></p>
+        <br>
         <p><a href="/theory/cycles" class="btn btn-danger btn-lg">Далее &raquo;</a></p>
+
+        <ref>
+            Источник: Эйлеров цикл. (2019, апрель 12). Википедия, свободная энциклопедия. Retrieved 22:42, мая 13, 2019 from https://ru.wikipedia.org/?oldid=99164224.
+        </ref>
     </div>
   </div>
 {% endblock %}
 
 {% block script %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-<script src="http://bootstraptema.ru/snippets/slider/2016/cbpFWSlider/cbpFWSlider.min.js"></script>
 
     <script>
         $('#nav_theory').addClass('active');
     </script>
-    <script>
-$( function() {
-$( '#cbp-fwslider' ).cbpFWSlider();
-});
-</script>
+
 {% endblock %}

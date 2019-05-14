@@ -23,7 +23,11 @@ class TestIsOnView(TemplateView):
                 gam_questions = Task.objects.filter(theme=filt_theme)
             else:
                 gam_questions = Task.objects.all()
-            our_questions = random.sample(list(gam_questions), number_of_questions)
+            if (number_of_questions < len(gam_questions)):
+                our_questions = random.sample(list(gam_questions), number_of_questions)
+            else:
+                our_questions = gam_questions
+                number_of_questions = len(gam_questions)
             our_data = list()
             for i in range(len(our_questions)):
                 our_data.append([i + 1, our_questions[i]])
@@ -130,6 +134,11 @@ def alltest(request):
 
 def yourtestlist(request):
     if request.user.is_authenticated:
+        # этот костыль вызовет баги
+        # donetests = DoneTest.objects.filter(login=request.user.username)
+        # need_to_del = donetests.filter(user_ans1='')
+        # for i in need_to_del:
+        #     i.delete()
         donetests = DoneTest.objects.filter(login=request.user.username).order_by('date_started')
         donetests = donetests.reverse()
         data = {'data': donetests}
