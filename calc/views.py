@@ -33,6 +33,8 @@ class FleriCalc(TemplateView):
         for i in edges:
             if len(i) != 2:
                 return render(request, self.template_name_error)
+            if len(i[0]) == 0 or len(i[1]) == 0:
+                return render(request, self.template_name_error)
             i.append(i[0]+'->'+i[1]) #по индексу 2 строка для ребра диграфа
             i.append('')#по индексу 3 строка для стиля ребра диграфа
             i.append(True)#по индексу 4 узнаём пройдено ли ребро
@@ -50,7 +52,7 @@ class FleriCalc(TemplateView):
                 d[i[1]] -= 1
 
         for i in d.values():
-            if i % 2 == 1:
+            if i != 0:
                 return render(request, self.template_name_error,
                               context={'msg': 'Граф не является эйлеровым'})
 

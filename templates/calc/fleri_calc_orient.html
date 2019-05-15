@@ -8,19 +8,23 @@
         <form method="POST">
             {% csrf_token %}
             <div class="col-md-12">
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <p>Ваш граф:
                         <br>
-                        <textarea name="graph" cols="30" rows="10" style="resize: none;"></textarea>
+                        <textarea name="graph" cols="25" rows="10" style="resize: none;"></textarea>
                     </p>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <p>Пример ввода: <br>
-                        <textarea cols="30" rows="10" style="resize: none;" disabled>a>b
+                        <textarea cols="20" rows="10" style="resize: none;" disabled>a>b
 b>c
 c>a</textarea>
 
                     </p>
+                </div>
+                <div class="col-md-3">
+                    <br>
+                <p>В вводе вы указываете рёбра по одному на строку в виде x>y для ребра из вершины x в y</p>
                 </div>
             </div>
 
