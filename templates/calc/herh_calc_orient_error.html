@@ -1,0 +1,17 @@
+{%  extends "mainApp/wrapper.html" %}
+
+{% block content %}
+{% load staticfiles %}
+<div class="jumbotron">
+    <div class="container">
+        <h2>Ошибка ввода!</h2>
+        <p>{{ msg }}</p>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $('#nav_сalc').addClass('active');
+    </script>
+{% endblock %}
